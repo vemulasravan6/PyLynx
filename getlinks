@@ -1,0 +1,35 @@
+import requests
+import sys
+from lxml import html
+
+try:
+    url = sys.argv[1]
+except:
+    print("No url provided") 
+    exit(1)
+    pass
+
+content = requests.get(url).text
+
+tree = html.fromstring(content)
+
+urls = tree.xpath(".//a")
+
+if len(urls)>0:
+
+    text = ""
+    for url in urls:
+        try:
+            text_lis = url.xpath(".//text()")
+            text = " ".join(text_lis)
+            text = text.rstrip().lstrip()
+        except:
+            text=""
+            pass
+        try:
+            url = url.xpath("./@href")[0]
+        except:
+            url=""
+            pass
+        print(text+" ### "+url)
+
