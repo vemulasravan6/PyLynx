@@ -1,2 +1,3 @@
 # PyLynx
-Lynx URL grabber - An alternative to grab links along with link texts
+
+Grab Links with texts from any webpage
